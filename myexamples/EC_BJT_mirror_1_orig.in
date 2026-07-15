@@ -1,0 +1,22 @@
+BJT Widlar current source
+
+* VX1 and VX2 have been added to get IC2 and Iref
+* BJT node order: C, B, E
+
+VCC  1  0  DC  8V
+Q1   B  B  0   NPN1
+Q2   C2 B  E2  NPN1
+VX2  1  B1 0.0
+R1   B1 B  $R1
+RE   E2 0  $RE
+RL   1  1A $RL
+VX1  1A C2 0.0
+
+.model NPN1 NPN(Is=3.108f Xti=3 Eg=1.11 Vaf=131.5 Bf=217.5 Ne=1.541
++           Ise=190.7f Ikf=1.296 Xtb=1.5 Br=6.18 Nc=2 Isc=0 Ikr=0 Rc=1
++           Cjc=14.57p Vjc=.75 Mjc=.3333 Fc=.5 Cje=26.08p Vje=.75
++           Mje=.3333 Tr=51.35n Tf=451p Itf=.1 Vtf=10 Xtf=2 Rb=10)
+
+.OP
+.SAVE v(B) v(E2) v(C2) VX1#branch VX2#branch
+.END
