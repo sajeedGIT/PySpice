@@ -14,7 +14,7 @@ logger = Logging.setup_logging()
 from PySpice.Spice.Netlist import Circuit
 from PySpice.Unit import *
 
-# from OperationalAmplifier import basic_comparator
+from OperationalAmplifier import BasicComparator
 
 ####################################################################################################
 
@@ -30,8 +30,8 @@ circuit.R(3, 'vcc', 'reference', 100@u_kΩ)
 circuit.R(4, 'reference', circuit.gnd, 100@u_kΩ)
 # Comparator
 # Fixme: ngspice is buggy with such subcircuit
-# circuit.subcircuit(basic_comparator)
-# circuit.X('comparator', 'BasicComparator', 'reference', 'comparator', 'vcc', circuit.gnd, 'output')
+circuit.subcircuit(BasicComparator())
+circuit.X('comparator', 'BasicComparator', 'reference', 'comparator', 'vcc', circuit.gnd, 'output')
 circuit.NonLinearVoltageSource(1, 'output', circuit.gnd,
                                expression='V(reference, comparator)',
                                table=((-micro(1), 0),
